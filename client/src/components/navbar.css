@@ -1,0 +1,30 @@
+.navbar {
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 999; /* Ensure the navbar stays on top */
+}
+
+.logo {
+    width: 100px; /* Adjust as needed */
+    height: auto;
+}
+
+.title {
+    text-align: center;
+    color: white;
+}
+ p {
+    font-size:large;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+    margin: 0;
+    
+    color: rgb(246, 246, 246); /* Text color */
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* Shadow effect */
+  
+  }

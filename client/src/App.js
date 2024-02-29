@@ -1,65 +1,62 @@
 import React, { useState } from 'react';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import samplePdfBytes from 'sample.pdf'; // Import the PDF file
-
+import Form from './components/form';
+import './App.css';
+import Confetti from 'react-confetti';
+import Navbar from './components/navbar';
+import useWindowSize from 'react-use/lib/useWindowSize';
+import home_image from './home_image.jpg';
 function App() {
-  const [name, setName] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [celebrate, setCelebrate] = useState(false);
+  const { width, height } = useWindowSize();
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  const toggleModal = () => {
+    setShowModal(!showModal);
   };
 
-  const downloadPdf = async () => {
-    // Load the existing PDF from imported bytes
-    const existingPdfBytes = samplePdfBytes;
-
-    // Create a new PDFDocument
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
-
-    // Embed a standard font
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-    // Get the first page of the document
-    const pages = pdfDoc.getPages();
-    const firstPage = pages[0];
-
-    // Add the name to the center of the page
-    const { width, height } = firstPage.getSize();
-    const centerX = width / 2;
-    const centerY = height / 2;
-    firstPage.drawText(name, {
-      x: centerX,
-      y: centerY,
-      size: 30,
-      font,
-      color: rgb(0, 0, 0),
-      textAlign: 'center',
-    });
-
-    // Serialize the PDFDocument to bytes
-    const pdfBytes = await pdfDoc.save();
-
-    // Create a blob from the bytes
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-
-    // Create a link element to download the PDF
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = 'modified_sample.pdf';
-    link.click();
+  // Function to toggle celebrate state to true for 3 seconds
+  const triggerCelebration = () => {
+    setCelebrate(true);
+    setTimeout(() => {
+      setCelebrate(false);
+    }, 3000);
   };
 
   return (
-    <div>
-      <h1>PDF Editor</h1>
-      <input
-        type="text"
-        value={name}
-        onChange={handleNameChange}
-        placeholder="Enter your name"
+    <div className='container'>
+      <Navbar />
+    {celebrate && (
+      <Confetti
+        width={width}
+        height={height}
+        recycle={false}
+        tweenDuration={3000}
       />
-      <button onClick={downloadPdf}>Download PDF</button>
+    )}
+    {showModal && (
+      <div className="modal">
+        <div className="modal-content">
+          <span className="close" onClick={toggleModal}>&times;</span>
+          {/* Pass the triggerCelebration function to the Form component */}
+          <Form triggerCelebration={triggerCelebration} toggleModal={toggleModal} />
+        </div>
+      </div>
+    )}
+    <div className='middle'>
+    <div className="side-text">
+      <h3>
+        JOINING THE MOVEMENT TO SAVE <br />
+        STATE ANIMAL OF TAMILNADU <br /></h3>
+        <h1>“NILGIRI TAHR”</h1> <br /><h3>
+        ON THE WORLD WILDLIFE DAY <br />
+        MARCH 3rd, 2024
+      </h3>
+    <button className="button-35" onClick={toggleModal}>Take Pledge</button>
     </div>
+    </div>
+
+  </div>
+  
   );
 }
 

@@ -1,38 +1,113 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.image{
+  height: 60vh;
+}
+.home{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(139,155,45);
+background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%, rgba(199,209,218,1) 100%);
+}
+/* App.css */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 50%; /* Adjust as per your requirement */
+  max-width: 500px; /* Adjust as per your requirement */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
+.middle{
+  display: flex;
+  justify-content: end;
+  align-items: center;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+}
+.side-text {
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.side-text h1 {
+  font-size: 10vh;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  
+  color: rgb(246, 246, 246); /* Text color */
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* Shadow effect */
+
+}
+.side-text h3{
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  font-size:x-large;
+  color: white; /* Text color */
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* Shadow effect */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+
+/* CSS */
+.button-35 {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: #121212;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-family: Inter,sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-35:hover {
+  box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
 }

@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const Object = require("./object");
 require('dotenv').config();
 const cors = require("cors");
+
+const fs = require("fs");
+const path = require("path");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -18,7 +21,7 @@ app.use((req, res, next) => {
     );
     next();
   });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 
 mongoose.connect(process.env.MONGODB_URL, {
@@ -56,4 +59,19 @@ app.post('/', async (req, res) => {
       res.status(500).json({ error: 'Error creating User' });
     }
   });
-app.listen(PORT, () => console.log("Server is running on port 3000"));
+// Send the PDF file
+app.get("/pdf", (req, res) => {
+    const pdfPath = path.resolve(__dirname, "./sample.pdf");
+  
+    fs.readFile(pdfPath, (error, data) => {
+      if (error) {
+        console.error('Error reading PDF:', error);
+        res.status(500).send('Internal Server Error');
+      } else {
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=sample.pdf');
+        res.send(data);
+      }
+    });
+  });
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
