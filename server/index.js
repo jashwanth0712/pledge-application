@@ -33,14 +33,7 @@ db.once('open', () => {
 
 
 app.get("/", (req, res) => {res.status(200).send("Hello World!")});
-app.get('/users',async (req, res) => {
-    try {
-      const animals = await Object.find(); // Assuming your model is named "Object"
-      res.status(200).json(animals);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
+
   
 // Create a new User
 app.post('/', async (req, res) => {
