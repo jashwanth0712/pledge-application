@@ -1,7 +1,7 @@
 /* Common styles */
 
 
-input {
+.input_field {
     margin-bottom: 10px;
     padding: 5px;
     border: 1px solid #efcece;
@@ -27,7 +27,7 @@ input {
 
   /* Styles for mobile view */
   @media (max-width: 800px) {
-    input {
+    .input_field {
       width: 80%;
     }
     
