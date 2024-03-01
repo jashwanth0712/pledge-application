@@ -12,19 +12,11 @@ function Form(props) {
   };
 
   const handleEmailChange = (event) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    if (!validateEmail(newEmail)) {
-      alert('Please enter a valid Gmail address');
-    }
+    setEmail(event.target.value);
   };
 
   const handleMobileChange = (event) => {
-    const newMobile = event.target.value;
-    setMobile(newMobile);
-    if (!validateMobile(newMobile)) {
-      alert('Please enter a valid 10-digit mobile number');
-    }
+    setMobile(event.target.value);
   };
 
   const validateEmail = (email) => {
