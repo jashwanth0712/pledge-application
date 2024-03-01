@@ -35,26 +35,17 @@ function Form(props) {
   };
   const downloadPdf = async () => {
     const pdfUrl = 'http://localhost:5000/pdf';
-    // await sendRequest();
     try {
-      // Fetch the PDF file
       const response = await fetch(pdfUrl);
       const existingPdfBytes = await response.arrayBuffer();
-
-      // Create a new PDFDocument
+  
       const pdfDoc = await PDFDocument.load(existingPdfBytes);
-
-      // Embed a standard font
       const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-      // Get the first page of the document
       const pages = pdfDoc.getPages();
       const firstPage = pages[0];
-
-      // Add the name to the center of the page
       const { width, height } = firstPage.getSize();
       const centerX = width / 3;
-      const centerY = 3.5*height / 5;
+      const centerY = 3.5 * height / 5;
       firstPage.drawText(name, {
         x: centerX,
         y: centerY,
@@ -63,27 +54,32 @@ function Form(props) {
         color: rgb(0, 0, 0),
         textAlign: 'center',
       });
-
-      // Serialize the PDFDocument to bytes
+  
       const pdfBytes = await pdfDoc.save();
-
-      // Create a blob from the bytes
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-
+      
+      if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
+        // For iOS devices, use the share sheet to download the PDF
+        const fileUrl = window.URL.createObjectURL(blob);
+        window.open(fileUrl, '_blank');
+      } else {
+        // For other devices, trigger the download
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'Wildlife_pledge_certificate.pdf';
+        link.click();
+      }
+  
       props.triggerCelebration();
       props.toggleModal();
-      // Create a link element to download the PDF
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = 'Wildlife_pledge_certificate.pdf';
-      setTimeout(() => {
-        link.click();
-      },2000);
-
+  
     } catch (error) {
       console.error('Error loading PDF:', error);
+      
     }
   };
+  
+  
 
   return (
     <div>

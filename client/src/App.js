@@ -25,6 +25,7 @@ function App() {
   return (
     <div className='container'>
       <Navbar />
+      <img src={home_image} alt="home_image" className="home_image" />
     {celebrate && (
       <Confetti
         width={width}

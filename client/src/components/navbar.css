@@ -12,7 +12,11 @@
     width: 100px; /* Adjust as needed */
     height: auto;
 }
-
+@media only screen and (max-width: 800px) {
+    .logo {
+        width: 50px; /* Adjust as needed */
+    }
+}
 .title {
     text-align: center;
     color: white;
@@ -28,3 +32,9 @@
     text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* Shadow effect */
   
   }
+  /* Media query for mobile view */
+@media only screen and (max-width: 800px) {
+    p {
+        font-size: small; /* Change font size to medium for mobile view */
+    }
+}
