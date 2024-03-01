@@ -10,11 +10,29 @@ function Form(props) {
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
+
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+    if (!validateEmail(newEmail)) {
+      alert('Please enter a valid Gmail address');
+    }
   };
+
   const handleMobileChange = (event) => {
-    setMobile(event.target.value);
+    const newMobile = event.target.value;
+    setMobile(newMobile);
+    if (!validateMobile(newMobile)) {
+      alert('Please enter a valid 10-digit mobile number');
+    }
+  };
+
+  const validateEmail = (email) => {
+    return /\b[A-Za-z0-9._%+-]+@gmail\.com\b/.test(email);
+  };
+
+  const validateMobile = (mobile) => {
+    return /^\d{10}$/.test(mobile);
   };
 
   const sendRequest = async () => {
@@ -38,8 +56,18 @@ function Form(props) {
 
   const downloadPdf = async () => {
     sendRequest();
-    if (!name) {
-      alert('Kindly fill in your name');
+    if (!name || !email || !mobile) {
+      alert('Please fill in all the fields');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert('Please enter a valid Gmail address');
+      return;
+    }
+
+    if (!validateMobile(mobile)) {
+      alert('Please enter a valid 10-digit mobile number');
       return;
     }
 
@@ -68,11 +96,9 @@ function Form(props) {
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
 
       if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
-        // For iOS devices, use the share sheet to download the PDF
         const fileUrl = window.URL.createObjectURL(blob);
         window.open(fileUrl, '_blank');
       } else {
-        // For other devices, trigger the download
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'Wildlife_pledge_certificate.pdf';
@@ -95,21 +121,24 @@ function Form(props) {
         value={name}
         onChange={handleNameChange}
         placeholder="Enter your name"
-        required  // Make the name field mandatory
+        required 
       />
       <input
         className="input_field"
-        type="text"
+        type="email"
         value={email}
         onChange={handleEmailChange}
         placeholder="Enter your Email"
+        required 
       />
       <input
         className="input_field"
-        type="text"
+        type="tel"
         value={mobile}
         onChange={handleMobileChange}
         placeholder="Enter your Mobile number"
+        pattern="[0-9]{10}"
+        required 
       />
       <button className="button-35" style={{ width: "100%", background: "#008000", color: "white" }} onClick={downloadPdf}>Get Certificate</button>
     </div>
