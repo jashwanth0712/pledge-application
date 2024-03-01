@@ -10,7 +10,6 @@ const objectSchema =  new mongoose.Schema({
     },
     mobile: {
       type: String,
-      required: true,
     },
     
   });

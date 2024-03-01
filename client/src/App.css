@@ -35,13 +35,36 @@ background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%
   width: 50%; /* Adjust as per your requirement */
   max-width: 500px; /* Adjust as per your requirement */
 }
+@media only screen and (max-width: 800px) {
+  .modal-content {
+    width: 80%; /* Adjust as per your requirement */
+  }
+}
 
 .close {
   position: absolute;
   top: 10px;
   right: 10px;
+  color: white;
+  background-color: red;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
   cursor: pointer;
+  line-height: 2;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Adding shadow effect */
+  /* Adjust line height to center the "x" vertically */
 }
+
+.close:hover {
+  background-color: darkred;
+}
+
+
 .middle{
   display: flex;
   justify-content: end;
@@ -125,7 +148,7 @@ background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%
   font-weight: 700;
   justify-content: center;
   line-height: 1;
-  margin: 0;
+  margin-top: 25px;
   outline: none;
   padding: 1rem 1.2rem;
   text-align: center;

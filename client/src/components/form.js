@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import './form.css';
 
 function Form(props) {
-    
   const [name, setName] = useState('');
-  const [email,setEmail] = useState('');
-  const [mobile,setMobile] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -15,9 +16,10 @@ function Form(props) {
   const handleMobileChange = (event) => {
     setMobile(event.target.value);
   };
+
   const sendRequest = async () => {
     try {
-      const response = await fetch('http://localhost:5000/submit', {
+      const response = await fetch('https://pledge-backend.vercel.app', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,12 +35,19 @@ function Form(props) {
       console.error('Error sending request:', error);
     }
   };
+
   const downloadPdf = async () => {
-    const pdfUrl = 'http://localhost:5000/pdf';
+    sendRequest();
+    if (!name) {
+      alert('Kindly fill in your name');
+      return;
+    }
+
+    const pdfUrl = 'https://pledge-backend.vercel.app/pdf';
     try {
       const response = await fetch(pdfUrl);
       const existingPdfBytes = await response.arrayBuffer();
-  
+
       const pdfDoc = await PDFDocument.load(existingPdfBytes);
       const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
       const pages = pdfDoc.getPages();
@@ -54,10 +63,10 @@ function Form(props) {
         color: rgb(0, 0, 0),
         textAlign: 'center',
       });
-  
+
       const pdfBytes = await pdfDoc.save();
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-      
+
       if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
         // For iOS devices, use the share sheet to download the PDF
         const fileUrl = window.URL.createObjectURL(blob);
@@ -69,41 +78,40 @@ function Form(props) {
         link.download = 'Wildlife_pledge_certificate.pdf';
         link.click();
       }
-  
+
       props.triggerCelebration();
       props.toggleModal();
-  
     } catch (error) {
       console.error('Error loading PDF:', error);
-      
     }
   };
-  
-  
 
   return (
-    <div>
+    <div className='input'>
       <h1>Enter your Details </h1>
       <input
+        className="input_field"
         type="text"
         value={name}
         onChange={handleNameChange}
         placeholder="Enter your name"
+        required  // Make the name field mandatory
       />
-       <input
+      <input
+        className="input_field"
         type="text"
         value={email}
         onChange={handleEmailChange}
         placeholder="Enter your Email"
       />
-       <input
+      <input
+        className="input_field"
         type="text"
         value={mobile}
         onChange={handleMobileChange}
         placeholder="Enter your Mobile number"
       />
-      <button className="button-35" onClick={downloadPdf}>Get Certificate</button>
-      
+      <button className="button-35" style={{ width: "100%", background: "#008000", color: "white" }} onClick={downloadPdf}>Get Certificate</button>
     </div>
   );
 }
