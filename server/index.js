@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Object = require("./object");
+const nodemailer = require('nodemailer');
+const { PDFDocument, StandardFonts, rgb } = require('pdf-lib');
 require('dotenv').config();
 const cors = require("cors");
 
@@ -23,7 +25,13 @@ app.use((req, res, next) => {
   });
 const PORT = process.env.PORT || 5000;
 
-
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.USER_EMAIL,
+    pass: process.env.USER_PASSWORD,
+  },
+});
 mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -53,7 +61,52 @@ app.post('/', async (req, res) => {
         email
       });
   
+          // Load the existing PDF file
+    const pdfPath = path.resolve(__dirname, "./sample.pdf");
+    const existingPdfBytes = fs.readFileSync(pdfPath);
+
+    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const pages = pdfDoc.getPages();
+    const firstPage = pages[0];
+    const { width, height } = firstPage.getSize();
+    const centerX = width / 3;
+    const centerY = 3.5 * height / 5;
+
+    // Add name to the PDF
+    firstPage.drawText(name, {
+      x: centerX,
+      y: centerY,
+      size: 30,
+      font,
+      color: rgb(0, 0, 0),
+      textAlign: 'center',
+    });
+
+    // Save the modified PDF
+    const pdfBytes = await pdfDoc.save();
       const savedUser = await newUser.save();
+      const mailOptions = {
+        from: process.env.USER_EMAIL,
+        to: email,
+        subject: 'Thanks for taking the Pledge!',
+        text: `Hi ${name},\n\nThanks for taking the pledge to save the Nilgiri Tahr. Your pledge has been recorded.\n\nBest Regards`,
+        attachments: [
+          {
+            filename: 'wildlife_pledge_certificate.pdf',
+            content: pdfBytes,
+            encoding: 'base64',
+          },
+        ],
+      };
+    
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
       res.status(201).json({"message": "User created", "user": savedUser});
     } catch (error) {
       res.status(500).json({ error: 'Error creating User' });

@@ -8,7 +8,7 @@ function Navbar() {
             <img src={logo1} alt="Logo 1" className="logo" />
             <div className="title">
                 <p>GOVERNMENT OF TAMILNADU</p>
-                <p>PROJECT NILIGIRI THAR</p>
+                <p>PROJECT NILGIRI TAHR</p>
             </div>
             <img src={logo2} alt="Logo 2" className="logo" />
         </div>

@@ -99,6 +99,8 @@ function Form(props) {
 
       props.triggerCelebration();
       props.toggleModal();
+      alert('Check your email for the certificate!');
+
     } catch (error) {
       console.error('Error loading PDF:', error);
     }
