@@ -102,9 +102,9 @@ app.post('/', async (req, res) => {
     
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            res.status(500).json({ error: error});
-          } else {
-            res.status(201).json({'Email sent: ' : info.response});
+            console.log("gone wrong", error)
+          } else {console.log('Email sent: ' + info.response);
+
           }
         });
       res.status(201).json({"message": "User created", "user": savedUser});
