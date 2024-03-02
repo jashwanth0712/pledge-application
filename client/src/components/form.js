@@ -6,7 +6,7 @@ function Form(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -20,7 +20,7 @@ function Form(props) {
   };
 
   const validateEmail = (email) => {
-    return /\b[A-Za-z0-9._%+-]+@gmail\.com\b/.test(email);
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
   };
 
   const validateMobile = (mobile) => {
@@ -65,6 +65,7 @@ function Form(props) {
 
     const pdfUrl = 'https://pledge-backend.vercel.app/pdf';
     try {
+      setIsLoading(true);
       const response = await fetch(pdfUrl);
       const existingPdfBytes = await response.arrayBuffer();
 
@@ -99,7 +100,8 @@ function Form(props) {
 
       props.triggerCelebration();
       props.toggleModal();
-      alert('Check your email for the certificate!');
+      alert('You will receive the certificate in the mail within 5 minutes!');
+      setIsLoading(false);
 
     } catch (error) {
       console.error('Error loading PDF:', error);
@@ -134,8 +136,14 @@ function Form(props) {
         pattern="[0-9]{10}"
         required 
       />
+      {isLoading ? (
+        <button className="button-35" style={{ width: "100%", background: "#008000", color: "white" }} disabled>
+          Submiting...
+        </button>
+      ) : (
       <button className="button-35" style={{ width: "100%", background: "#008000", color: "white" }} onClick={downloadPdf}>Get Certificate</button>
-    </div>
+      )}
+      </div>
   );
 }
 
