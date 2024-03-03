@@ -70,7 +70,9 @@ function App() {
     <button className="button-35" onClick={toggleModal}>Take Pledge</button>
     </div>
     </div>
-
+    <footer className="footer">
+        Developed by IIITDM Kancheepuram
+      </footer>
   </div>
   
   );
