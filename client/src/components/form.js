@@ -100,7 +100,7 @@ function Form(props) {
 
       props.triggerCelebration();
       props.toggleModal();
-      alert('You will receive the certificate in the mail within 5 minutes!');
+      alert('You will receive the certificate in the mail within 15-20 minutes!');
       setIsLoading(false);
 
     } catch (error) {
