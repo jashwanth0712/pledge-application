@@ -11,6 +11,10 @@ const objectSchema = new mongoose.Schema({
     mobile: {
         type: String,
     },
+    mail_sent: {
+        type: Boolean,
+        default: false // Default value indicating the email has not been sent initially
+    },
     createdAt: {
         type: Date,
         default: Date.now
