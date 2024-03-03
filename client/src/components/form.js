@@ -100,7 +100,7 @@ function Form(props) {
 
       props.triggerCelebration();
       props.toggleModal();
-      alert('You will receive the certificate in the mail within 15-20 minutes!');
+      alert('If you are unable to get download the PDF , You will receive the certificate in the mail within an hour!');
       setIsLoading(false);
 
     } catch (error) {
