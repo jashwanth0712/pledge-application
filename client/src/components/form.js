@@ -127,7 +127,7 @@ function Form(props) {
         placeholder="Enter your Email"
         required 
       />
-      // <input
+      {/* // <input
       //   className="input_field"
       //   type="tel"
       //   value={mobile}
@@ -135,7 +135,7 @@ function Form(props) {
       //   placeholder="Enter your Mobile number"
       //   pattern="[0-9]{10}"
       //   required 
-      // />
+      // /> */}
       {isLoading ? (
         <button className="button-35" style={{ width: "100%", background: "#008000", color: "white" }} disabled>
           Submiting...
