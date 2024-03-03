@@ -48,7 +48,7 @@ function Form(props) {
 
   const downloadPdf = async () => {
     sendRequest();
-    if (!name || !email || !mobile) {
+    if (!name || !email ) {
       alert('Please fill in all the fields');
       return;
     }
@@ -58,10 +58,10 @@ function Form(props) {
       return;
     }
 
-    if (!validateMobile(mobile)) {
-      alert('Please enter a valid 10-digit mobile number');
-      return;
-    }
+    // if (!validateMobile(mobile)) {
+    //   alert('Please enter a valid 10-digit mobile number');
+    //   return;
+    // }
 
     const pdfUrl = 'https://pledge-backend.vercel.app/pdf';
     try {
@@ -127,15 +127,15 @@ function Form(props) {
         placeholder="Enter your Email"
         required 
       />
-      <input
-        className="input_field"
-        type="tel"
-        value={mobile}
-        onChange={handleMobileChange}
-        placeholder="Enter your Mobile number"
-        pattern="[0-9]{10}"
-        required 
-      />
+      // <input
+      //   className="input_field"
+      //   type="tel"
+      //   value={mobile}
+      //   onChange={handleMobileChange}
+      //   placeholder="Enter your Mobile number"
+      //   pattern="[0-9]{10}"
+      //   required 
+      // />
       {isLoading ? (
         <button className="button-35" style={{ width: "100%", background: "#008000", color: "white" }} disabled>
           Submiting...
