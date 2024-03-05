@@ -1,7 +1,42 @@
 import React, { useState } from 'react';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import './form.css';
-
+const statesAndUTs = [
+  'Andhra Pradesh',
+  'Arunachal Pradesh',
+  'Assam',
+  'Bihar',
+  'Chhattisgarh',
+  'Goa',
+  'Gujarat',
+  'Haryana',
+  'Himachal Pradesh',
+  'Jharkhand',
+  'Karnataka',
+  'Kerala',
+  'Madhya Pradesh',
+  'Maharashtra',
+  'Manipur',
+  'Meghalaya',
+  'Mizoram',
+  'Nagaland',
+  'Odisha',
+  'Punjab',
+  'Rajasthan',
+  'Sikkim',
+  'Tamil Nadu',
+  'Telangana',
+  'Tripura',
+  'Uttar Pradesh',
+  'Uttarakhand',
+  'West Bengal',
+  'Andaman and Nicobar Islands',
+  'Chandigarh',
+  'Dadra and Nagar Haveli and Daman and Diu',
+  'Lakshadweep',
+  'Delhi',
+  'Puducherry',
+];
 function Form(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -48,7 +83,7 @@ function Form(props) {
 
   const downloadPdf = async () => {
     sendRequest();
-    if (!name || !email ) {
+    if (!name || !email || !mobile) {
       alert('Please fill in all the fields');
       return;
     }
@@ -127,6 +162,32 @@ function Form(props) {
         placeholder="Enter your Email"
         required 
       />
+      <select 
+  value={mobile} 
+  onChange={handleMobileChange}
+  style={{
+    width: '100%', // Make the dropdown full width
+    padding: '8px', // Add padding for better touch interaction
+    borderRadius: '4px', // Add some border radius for a modern look
+    fontSize: '16px', // Increase font size for better readability
+    marginTop: '8px', // Add some margin at the top for spacing
+    border: '1px solid #ccc', // Add a border for visual separation
+    backgroundColor: '#fff', // Set background color to white
+    appearance: 'none', // Remove default dropdown styling
+    backgroundImage: 'url("data:image/svg+xml,%3csvg viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3e%3cpath d=\'M17 10l-5 5-5-5h10z\' fill=\'%23000\'/%3e%3c/svg%3e")', // Add custom arrow icon
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 8px center',
+    backgroundSize: '16px',
+  }}
+>
+  <option value="">Select State/UT</option>
+      {statesAndUTs.sort().map((state) => (
+        <option key={state} value={state}>
+          {state}
+        </option>
+      ))}
+    </select>
+
       {/* // <input
       //   className="input_field"
       //   type="tel"
