@@ -4,14 +4,28 @@
 .image{
   height: 60vh;
 }
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.banner p{
+  color: white;
+  background-color: rgb(120, 26, 26);
+  padding: 10px;
+  border-radius: 15px;
+  width: fit-content;
+}
+.side-text{
+  font-size: small;
+}
 .home{
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgb(139,155,45);
-background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%, rgba(199,209,218,1) 100%);
 }
 /* App.css */
 .modal {
@@ -45,7 +59,7 @@ background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #1a5524;
+  background-color:rgb(120, 26, 26);
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -76,8 +90,9 @@ background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%
 
 .middle{
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
+  margin: 10px;
 
 }
 .side-text {
@@ -90,7 +105,7 @@ background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%
 }
 
 .side-text h1 {
-  font-size: 10vh;
+  font-size: 8vh;
   line-height: 1.5;
   text-align: center;
   margin: 0;
@@ -102,13 +117,48 @@ background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%
 .home_image{
   display: none;
 }
+.side-text{
+  width: 55%;
+}
+.side-text h2{
+  font-weight: bolder;
+}
+.pledged_num{
+  background-color: rgb(120, 26, 26) ;
+  color: rgb(120, 26, 26);
+  width:fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+}
+.pledged_num p{
+  color: white;
+}
+.button-1 {
+  border-radius: 50%; /* Makes the button circular */
+  background-color: purple;
+  color: white;
+  font-weight: bold;
+  width: 200px; /* Set width of the button */
+  height: 200px; /* Set height of the button */
+  display: flex;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Adding shadow effect */
+
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 35px; /* Adjust font size as needed */
+}
+
+
 .side-text h3{
   line-height: 1.5;
   text-align: center;
   margin: 0;
   font-size:x-large;
-  color: white; /* Text color */
-  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* Shadow effect */
+  color: black; /* Text color */
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow effect */
 }
 @media only screen and (max-width: 800px) {
   .container{
@@ -117,6 +167,14 @@ background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%
     justify-content: center;
     align-items: center;
   }
+  .banner p{
+    color: white;
+    margin: 5px;
+    background-color: rgb(120, 26, 26);
+    padding: 10px;
+    font-size: medium;
+    border-radius: 15px;
+  }
   .home_image {
     display: block;
     width: 80%;
@@ -124,17 +182,29 @@ background: linear-gradient(0deg, rgba(139,155,45,1) 0%, rgba(199,209,218,1) 67%
     border: 5px solid black; /* Adding black border */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adding shadow effect */
 }
+.middle{
+  flex-direction: column;
+  margin: 0px;
+}
 
+.side-text{
+  width: 85%;
+}
   .side-text h1 {
     font-size: 6vh;
   }
   .side-text h3{
-    font-size:large;
+    font-size:medium;
   }
   .home{
     position: absolute;
     bottom: 0;
     left: 0;
+  }
+  .button-1{
+    width: 150px;
+    height: 150px;
+    font-size: 30px;
   }
 
 }

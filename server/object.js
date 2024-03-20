@@ -21,4 +21,4 @@ const objectSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Users', objectSchema);
+module.exports = mongoose.model('Mission_life_Users', objectSchema);

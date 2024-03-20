@@ -1,10 +1,9 @@
 .navbar {
+    position: relative;
     top: 0;
     left: 0;
     display: flex;
-    justify-content:center;
     align-items: center;
-    padding: 10px 20px;
     z-index: 999; /* Ensure the navbar stays on top */
 }
 
@@ -12,29 +11,41 @@
     width: 100px; /* Adjust as needed */
     height: auto;
 }
+
 @media only screen and (max-width: 800px) {
     .logo {
         width: 50px; /* Adjust as needed */
     }
+    .title{
+        display: none;
+    }
 }
+
 .title {
     text-align: center;
-    color: white;
+    color: black;
 }
- p {
-    font-size:large;
+
+p {
+    font-size: large;
     font-weight: 600;
     line-height: 1.5;
     text-align: center;
     margin: 0;
-    
-    color: rgb(246, 246, 246); /* Text color */
-    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* Shadow effect */
-  
-  }
-  /* Media query for mobile view */
+    color: black; /* Text color */
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+/* Add vertical line after images and title */
+.navbar img:not(:last-child),
+.title:not(:last-child) {
+    border-right: 1px solid white; /* Change the color as needed */
+    padding-right: 10px; /* Add some spacing between the image and the vertical line */
+}
+
+/* Media query for mobile view */
 @media only screen and (max-width: 800px) {
     p {
-        font-size: small; /* Change font size to medium for mobile view */
+        font-size: small; /* Change font size to small for mobile view */
     }
 }

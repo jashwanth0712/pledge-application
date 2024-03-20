@@ -198,11 +198,11 @@ function Form(props) {
       //   required 
       // /> */}
       {isLoading ? (
-        <button className="button-35" style={{ width: "100%", background: "#008000", color: "white" }} disabled>
+        <button className="button-35" style={{ width: "100%", background: "rgb(120, 26, 26)", color: "white" }} disabled>
           Submiting...
         </button>
       ) : (
-      <button className="button-35" style={{ width: "100%", background: "#008000", color: "white" }} onClick={downloadPdf}>Get Certificate</button>
+      <button className="button-35" style={{ width: "100%", background: "rgb(120, 26, 26)", color: "white" }} onClick={downloadPdf}>Get Certificate</button>
       )}
       </div>
   );

@@ -44,7 +44,11 @@ db.once('open', () => {
 
 
 app.get("/", (req, res) => {res.status(200).send("Hello World!")});
-
+app.get("/get-pledged",async(req,res)=>{
+  console.log("request recieved")
+  const users = await Object.find({}).then((users)=>{console.log(users.length);return users})
+  res.send({"pledged":users.length})
+})
   
 // Create a new User
 app.post('/', async (req, res) => {
